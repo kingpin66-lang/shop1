@@ -11,11 +11,9 @@ console.log("MONGO_URI exists:", !!process.env.MONGO_URI);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
-        console.log("MongoDB Connected");
+        console.log("Connected to DB:", mongoose.connection.db.databaseName);
     })
-    .catch(err => {
-        console.log("MongoDB Error:", err);
-    });
+    .catch(err => console.log(err));
 
 
 const PORT = process.env.PORT || 3000;
