@@ -1,17 +1,22 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-
+require("dotenv").config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// MongoDB Connection
-mongoose.connect(process.env.mongo_url)
-    .then(() => console.log("MongoDB Connected"))
-    .catch(err => console.log(err));
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        console.log("MongoDB Connected");
+    })
+    .catch(err => {
+        console.log("MongoDB Error:", err);
+    });
 
+
+const PORT = process.env.PORT || 3000;
 // Schema
 const categorySchema = new mongoose.Schema({
     name: {
@@ -68,6 +73,6 @@ app.delete("/categories/:id", async (req, res) => {
     });
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log("Server running on port 3000");
 });
