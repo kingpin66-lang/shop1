@@ -24,6 +24,9 @@ const categorySchema = new mongoose.Schema({
 const Category = mongoose.model("Category", categorySchema);
 
 // Get all categories
+app.get("/", async (req, res) => {
+   await res.send("backend is running")
+})
 app.get("/categories", async (req, res) => {
     const categories = await Category.find();
     res.json(categories);
