@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect("mongodb://127.0.0.1:27017/shop1")
+mongoose.connect(process.env.mongo_url)
     .then(() => console.log("MongoDB Connected"))
     .catch(err => console.log(err));
 
@@ -25,7 +25,7 @@ const Category = mongoose.model("Category", categorySchema);
 
 // Get all categories
 app.get("/", async (req, res) => {
-   await res.send("backend is running")
+    await res.send("backend is running")
 })
 app.get("/categories", async (req, res) => {
     const categories = await Category.find();
