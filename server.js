@@ -8,6 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 console.log("MONGO_URI exists:", !!process.env.MONGO_URI);
+
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("MongoDB Connected");
@@ -47,6 +48,7 @@ app.get("/categories/:id", async (req, res) => {
 
 // Add category
 app.post("/categories", async (req, res) => {
+    console.log(req.body)
     const category = new Category({
         name: req.body.name
     });
